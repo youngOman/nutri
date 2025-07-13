@@ -332,31 +332,20 @@ session_start();
 </style>
 <?php include("include/header2.php"); ?>
 
-<!-- 工具導航區域 -->
-<div class="row">
-	<div class="col-xl-12">
-		<div class="tools-section">
-			<div class="tools-nav">
-				<a href="calculater.php" class="tool-btn">
-					<i class="fas fa-calculator"></i>
-					<span>BMI計算器</span>
-				</a>
-				<a href="map.php" class="tool-btn">
-					<i class="fas fa-map-marker-alt"></i>
-					<span>健身地圖</span>
-				</a>
-			</div>
-		</div>
+
+<div class="col-lg-4">
+	<div class="btn-group" role="group" aria-label="Basic example">
+		<ul style="float:right;">
+			<!-- <button type="button" class="btn btn-info" onclick="window.location.href='air.php'">空氣品質</button> -->
+			<button type="button" class="btn btn-info" onclick="window.location.href='mapajax.php'">健身地圖</button>
+			<!-- <button type="button" class="btn btn-info" onclick="window.location.href='weather.php'">天氣預報</button> -->
+			<button type="button" class="btn btn-info" onclick="window.location.href='calculater.php'">計算器</button>
+		</ul>
 	</div>
 </div>
 
 <div class="row">
 	<div class="col-lg-12">
-
-		<div class="btn-group">
-			<button type="button" class="btn btn-info" onclick="window.location.href='mapajax.php'">健身地圖</button>
-			<button type="button" class="btn btn-info" onclick="window.location.href='calculater.php'">計算器</button>
-		</div>
 
 		<div class="quick-buttons-card">
 			<p>[常用營養成分排行]
