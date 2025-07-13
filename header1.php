@@ -10,6 +10,7 @@
  crossorigin="anonymous"></script>
  <link rel="stylesheet" type="text/css" href="bootstrap4/css/bootstrap.min.css">
  <script src="bootstrap4/js/bootstrap.min.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
  <style>
    /* 全局樣式優化 */
    body {
@@ -54,5 +55,108 @@
    
    ::-webkit-scrollbar-thumb:hover {
      background: linear-gradient(135deg, #357abd, #2968a3);
+   }
+   
+   /* 頭部區域樣式 */
+   .header-section {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 15px 0;
+     margin-bottom: 20px;
+   }
+   
+   .logo-container {
+     flex-grow: 1;
+   }
+   
+   .logo-container .img-fluid {
+     max-height: 80px;
+     width: auto;
+   }
+   
+   .tools-nav {
+     display: flex;
+     gap: 15px;
+     align-items: center;
+   }
+   
+   .tool-btn {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 12px 16px;
+     background: linear-gradient(135deg, #fff, #f8f9fa);
+     border: 1px solid #e9ecef;
+     border-radius: 10px;
+     text-decoration: none;
+     color: #495057;
+     transition: all 0.3s ease;
+     min-width: 90px;
+     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+   }
+   
+   .tool-btn:hover {
+     background: linear-gradient(135deg, #4a90e2, #357abd);
+     color: #fff;
+     transform: translateY(-2px);
+     box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+     text-decoration: none;
+   }
+   
+   .tool-btn i {
+     font-size: 20px;
+     margin-bottom: 5px;
+   }
+   
+   .tool-btn span {
+     font-size: 12px;
+     font-weight: 500;
+     text-align: center;
+   }
+   
+   /* 響應式設計 */
+   @media (max-width: 768px) {
+     .header-section {
+       flex-direction: column;
+       gap: 15px;
+     }
+     
+     .tools-nav {
+       justify-content: center;
+       width: 100%;
+     }
+     
+     .tool-btn {
+       min-width: 80px;
+       padding: 10px 12px;
+     }
+     
+     .tool-btn i {
+       font-size: 18px;
+     }
+     
+     .tool-btn span {
+       font-size: 11px;
+     }
+   }
+   
+   @media (max-width: 576px) {
+     .tools-nav {
+       flex-direction: column;
+       gap: 10px;
+     }
+     
+     .tool-btn {
+       flex-direction: row;
+       width: 200px;
+       justify-content: center;
+       gap: 8px;
+     }
+     
+     .tool-btn i {
+       margin-bottom: 0;
+       font-size: 16px;
+     }
    }
  </style>

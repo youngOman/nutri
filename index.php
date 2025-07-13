@@ -13,16 +13,6 @@
 include("include/cart.php");
 $cart = new cart();
 session_start();
-if (isset($_GET['op']) && $_GET['op'] == 'delete') {
-	$id = $_GET['id'];
-	$sql = "DELETE FROM `nutri` WHERE `id`=$id";
-	$cart->rundata($sql);
-	header("LOCATION:./");
-}
-if (isset($_GET['pass'])) {
-	if ($_GET['pass'] == "young") $_SESSION['user'] = $_GET['pass'];
-}
-if (isset($_GET['logout']) && $_GET['logout'] == 1) unset($_SESSION['user']);
 ?>
 <?php include("include/header1.php"); ?>
 <script>
@@ -68,20 +58,13 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) unset($_SESSION['user']);
 					str += '<tr><th>食品分類</th><th>食品名稱</th><th id="filedth">' + fname;
 					if (orderbyOp == "ASC") str += " <a href='javascript:void(0);' onclick='orderby(0);'>遞減∇</a>";
 					else str += " <a href='javascript:void(0);' onclick='orderby(1);'>∆遞增</a>";
-					str += '</th><th class="descTd">內容物描述</th>';
-					<?php if (isset($_SESSION['user'])) { ?>
-						str += '<th class="descTd">修改</th><th class="descTd">刪除</th></tr>';
-					<?php } ?>
+					str += '</th><th class="descTd">內容物描述</th></tr>';
 					for (var i = 0; i < rt.length; i++) {
 						str += "<tr>";
 						str += "<td class='tr" + rt[i]['id'] + "'>" + rt[i]["n_class"] + "</td>";
 						str += "<td class='tr" + rt[i]['id'] + "'><a href='javascript:void(0);' onclick='pdDetail(" + rt[i]['id'] + ")'>" + rt[i]["n_name"] + "</a></td>";
 						str += "<td class='tr" + rt[i]['id'] + "'>" + rt[i][filed] + "</td>";
 						str += "<td class='descTd tr" + rt[i]['id'] + "'>" + rt[i]["n_desc"] + "</td>";
-						<?php if (isset($_SESSION['user'])) { ?>
-							str += "<td style='text-align:center;' class=\"descTd tr" + rt[i]['id'] + "\"><a href='add.php?id=" + rt[i]['id'] + "'><img src='images/1.png' style='width:16px;'></a></td>";
-							str += "<td style='text-align:center;' class=\"descTd tr" + rt[i]['id'] + "\"><a href='javascript:void(0);' onclick=\"if(confirm('確定刪除?')) window.location='./?op=delete&id=" + rt[i]['id'] + "';\"  style='color:#f00;'><i class=\"fas fa-trash-alt fa-1x\"></i></a></td>";
-						<?php } ?>
 						str += "</tr>";
 
 						/*str+="<tr><td></td><td></td><td colspan='3'>";
@@ -161,9 +144,6 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) unset($_SESSION['user']);
 
 	}
 
-	function checkPass() {
-		if (pass = prompt("請輸入密碼")) window.location = "./?pass=" + pass;
-	}
 
 	function changeFiled() {
 		var filed = $("#filed_t").val();
@@ -230,16 +210,17 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) unset($_SESSION['user']);
 	}
 
 	.quick-buttons-card {
-		background: linear-gradient(135deg, #ffac55, #ff8f42);
+		background: linear-gradient(135deg, #f8f9fb, #e9ecf1);
 		border-radius: 12px;
 		padding: 20px;
 		margin-bottom: 20px;
-		border: none;
-		color: #fff;
+		border: 1px solid #e3e7ed;
+		color: #495057;
+		box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 	}
 
 	.quick-buttons-card p {
-		color: #fff;
+		color: #495057;
 		font-weight: 600;
 		margin-bottom: 15px;
 	}
@@ -263,14 +244,6 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) unset($_SESSION['user']);
 		box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 	}
 
-	.btn-orange {
-		background: linear-gradient(135deg, #ff8f42, #ff7226);
-	}
-
-	.btn-orange:hover {
-		background: linear-gradient(135deg, #ff7226, #e55a0a);
-		box-shadow: 0 4px 12px rgba(255, 143, 66, 0.3);
-	}
 
 	/* 輸入元素樣式 */
 	.form-control-modern {
@@ -309,14 +282,6 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) unset($_SESSION['user']);
 		z-index: 1000;
 	}
 
-	/* 管理按鈕區域 */
-	.admin-controls {
-		margin-bottom: 20px;
-		padding: 15px;
-		background: #f8f9fa;
-		border-radius: 8px;
-		border-left: 4px solid #4a90e2;
-	}
 
 	/* 結果顯示區域 */
 	.results-container {
@@ -359,13 +324,6 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) unset($_SESSION['user']);
 
 <div class="row">
 	<div class="col-lg-12">
-		<div class="admin-controls">
-			<?php if (isset($_SESSION['user'])) {
-				echo '<button class="btn-modern" onclick="window.location=\'add.php\';">新增資料</button>';
-				echo '<button class="btn-modern btn-orange" onclick="window.location=\'./?logout=1\';">登出</button>';
-			} else echo '<button class="btn-modern" onclick="checkPass();">登入管理</button>';
-			?>
-		</div>
 
 		<div class="quick-buttons-card">
 			<p>[常用營養成分排行]
