@@ -62,6 +62,9 @@
      text-align: center;
      padding: 15px 0;
      margin-bottom: 15px;
+     display: block;
+     width: 100%;
+     clear: both;
    }
    
    .logo-container {
@@ -80,6 +83,9 @@
      margin-bottom: 20px;
      background: rgba(248, 249, 250, 0.5);
      border-radius: 10px;
+     display: block;
+     width: 100%;
+     clear: both;
    }
    
    .tools-nav {
