@@ -329,6 +329,24 @@ session_start();
 </style>
 <?php include("include/header2.php"); ?>
 
+<!-- 工具導航區域 -->
+<div class="row">
+	<div class="col-xl-12">
+		<div class="tools-section">
+			<div class="tools-nav">
+				<a href="calculater.php" class="tool-btn">
+					<i class="fas fa-calculator"></i>
+					<span>BMI計算器</span>
+				</a>
+				<a href="map.php" class="tool-btn">
+					<i class="fas fa-map-marker-alt"></i>
+					<span>健身地圖</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="row">
 	<div class="col-lg-12">
 
