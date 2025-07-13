@@ -175,13 +175,31 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) unset($_SESSION['user']);
 	}
 </script>
 <style>
+	/* 現代化表格樣式 */
+	.table {
+		background-color: #fff;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+	}
+	
 	.table th {
 		text-align: left;
-		background-color: #bbb;
+		background: linear-gradient(135deg, #4a90e2, #357abd);
+		color: #fff;
+		font-weight: 600;
+		padding: 12px 16px;
+		border: none;
+	}
+
+	.table td {
+		padding: 12px 16px;
+		border-bottom: 1px solid #e9ecef;
+		vertical-align: middle;
 	}
 
 	.table tr:nth-child(odd) {
-		background-color: #ccc;
+		background-color: #f8f9fa;
 	}
 
 	.table tr:nth-child(even) {
@@ -189,47 +207,172 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) unset($_SESSION['user']);
 	}
 
 	.table-hover tr:hover td {
-		background-color: #ffb;
+		background-color: #e3f2fd;
+		transition: background-color 0.2s ease;
 	}
 
 	.descTd {
 		display: none;
 	}
 
-	.table td,
-	th {
-		margin: 0px;
-		padding: 0px;
-	}
-
 	.trcolor {
-		background-color: #ffb;
+		background-color: #bbdefb !important;
 	}
 
+	/* 卡片式容器 */
+	.search-card {
+		background: #fff;
+		border-radius: 12px;
+		padding: 20px;
+		box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+		margin-bottom: 20px;
+		border: 1px solid #e3f2fd;
+	}
+
+	.quick-buttons-card {
+		background: linear-gradient(135deg, #ffac55, #ff8f42);
+		border-radius: 12px;
+		padding: 20px;
+		margin-bottom: 20px;
+		border: none;
+		color: #fff;
+	}
+
+	.quick-buttons-card p {
+		color: #fff;
+		font-weight: 600;
+		margin-bottom: 15px;
+	}
+
+	/* 現代化按鈕樣式 */
+	.btn-modern {
+		background: linear-gradient(135deg, #4a90e2, #357abd);
+		border: none;
+		border-radius: 6px;
+		color: #fff;
+		padding: 8px 16px;
+		margin: 2px;
+		font-weight: 500;
+		transition: all 0.2s ease;
+		cursor: pointer;
+	}
+
+	.btn-modern:hover {
+		background: linear-gradient(135deg, #357abd, #2968a3);
+		transform: translateY(-1px);
+		box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+	}
+
+	.btn-orange {
+		background: linear-gradient(135deg, #ff8f42, #ff7226);
+	}
+
+	.btn-orange:hover {
+		background: linear-gradient(135deg, #ff7226, #e55a0a);
+		box-shadow: 0 4px 12px rgba(255, 143, 66, 0.3);
+	}
+
+	/* 輸入元素樣式 */
+	.form-control-modern {
+		border-radius: 6px;
+		border: 2px solid #e9ecef;
+		padding: 10px 15px;
+		transition: border-color 0.2s ease;
+	}
+
+	.form-control-modern:focus {
+		border-color: #4a90e2;
+		box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+		outline: none;
+	}
+
+	.select-modern {
+		border-radius: 6px;
+		border: 2px solid #e9ecef;
+		padding: 8px 12px;
+		background-color: #fff;
+		transition: border-color 0.2s ease;
+	}
+
+	.select-modern:focus {
+		border-color: #4a90e2;
+		outline: none;
+	}
+
+	/* Loading 動畫 */
 	#loadingImg {
-		position: absolute;
+		position: fixed;
 		top: 50%;
 		left: 50%;
 		display: none;
-		margin: -100px 0 0 -100px;
+		margin: -50px 0 0 -50px;
+		z-index: 1000;
+	}
+
+	/* 管理按鈕區域 */
+	.admin-controls {
+		margin-bottom: 20px;
+		padding: 15px;
+		background: #f8f9fa;
+		border-radius: 8px;
+		border-left: 4px solid #4a90e2;
+	}
+
+	/* 結果顯示區域 */
+	.results-container {
+		background: #fff;
+		border-radius: 12px;
+		padding: 20px;
+		box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+		min-height: 200px;
+	}
+
+	.detail-container {
+		background: #fff;
+		border-radius: 12px;
+		padding: 20px;
+		box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+		min-height: 200px;
+		position: sticky;
+		top: 20px;
+	}
+
+	/* 響應式設計 */
+	@media (max-width: 768px) {
+		.search-card, .quick-buttons-card {
+			margin: 10px 0;
+			padding: 15px;
+		}
+		
+		.btn-modern {
+			width: 48%;
+			margin-bottom: 8px;
+		}
+		
+		.table th, .table td {
+			padding: 8px;
+			font-size: 14px;
+		}
 	}
 </style>
 <?php include("include/header2.php"); ?>
 
 <div class="row">
 	<div class="col-lg-12">
-		<?php if (isset($_SESSION['user'])) {
-			echo '<input type="button" value="新增" onclick="window.location=\'add.php\';">';
-			echo ' <input type="button" value="登出" onclick="window.location=\'./?logout=1\';">';
-		} else echo '<input type="button" value="登入管理" onclick="checkPass();">';
-		?>
+		<div class="admin-controls">
+			<?php if (isset($_SESSION['user'])) {
+				echo '<button class="btn-modern" onclick="window.location=\'add.php\';">新增資料</button>';
+				echo '<button class="btn-modern btn-orange" onclick="window.location=\'./?logout=1\';">登出</button>';
+			} else echo '<button class="btn-modern" onclick="checkPass();">登入管理</button>';
+			?>
+		</div>
 
-		<div style="border:#ffac55 1px dashed; padding:5px; ">
-			<p style="margin:0px; padding:0px;">[常用營養成分排行]
+		<div class="quick-buttons-card">
+			<p>[常用營養成分排行]
 				<?php
 				$sql = "SELECT * FROM `fileds` WHERE `id`>=5 ";
 				$temp = $cart->rundata($sql);
-				echo "<select id='filed_t' onchange='changeFiled();' style='width:200px;'>";
+				echo "<select id='filed_t' onchange='changeFiled();' class='select-modern' style='width:200px; margin-left: 10px;'>";
 				echo "<option>請選擇</option>";
 				for ($i = 0; $i < sizeof($temp); $i++) {
 					echo "<option value='" . $temp[$i]['filed'] . "'>" . $temp[$i]['filedName'] . "</option>";
@@ -237,6 +380,7 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) unset($_SESSION['user']);
 				echo "</select>";
 				?>
 			</p>
+			<div>
 			<?php
 			//$sql="SHOW FULL COLUMNS FROM `nutri`";
 			$sql = "SELECT * FROM `fileds` WHERE `orderby`>2 ORDER BY `orderby` DESC";
@@ -244,10 +388,11 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) unset($_SESSION['user']);
 			//print_r($temp);
 			for ($i = 0; $i < sizeof($temp); $i++) {
 				$qstr = "&" . $_SERVER['QUERY_STRING']; //取得網址?後面的值
-				echo "<input type='button' value='" . $temp[$i]['filedName'] . "'";
-				echo "onclick=\"pdlist('" . $temp[$i]['filed'] . "','" . $temp[$i]['filedName'] . "')\"style='width:110px;'> ";
+				echo "<button class='btn-modern' value='" . $temp[$i]['filedName'] . "'";
+				echo "onclick=\"pdlist('" . $temp[$i]['filed'] . "','" . $temp[$i]['filedName'] . "')\" style='width:110px; margin: 3px;'>" . $temp[$i]['filedName'] . "</button> ";
 			}
 			?>
+			</div>
 		</div>
 		<?php
 		if (isset($_GET['p'])) {
@@ -258,47 +403,74 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) unset($_SESSION['user']);
 			$whereStr = "WHERE (`n_name` LIKE '%$p%' OR `n_desc` LIKE '%$p%') $str";
 		}
 		?>
-		<!--<form action="" method="get" id="form1">-->
-		<input type="hidden" name="filed" value="n_crude_protein">
-		<input type="hidden" name="fname" value="粗蛋白(g)">
-		<input type="hidden" name="orderbyOp" value="DESC">
-		<input type="hidden" name="oid" value="">
+		<div class="search-card">
+			<!--<form action="" method="get" id="form1">-->
+			<input type="hidden" name="filed" value="n_crude_protein">
+			<input type="hidden" name="fname" value="粗蛋白(g)">
+			<input type="hidden" name="orderbyOp" value="DESC">
+			<input type="hidden" name="oid" value="">
 
-		<select name="class" onchange="pdlist(); ">
-			<option value="all">全部</option>
-			<?php
-			$sql = "SELECT * FROM `class`";
-			$tempClass = $cart->rundata($sql);
-			for ($i = 0; $i < sizeof($tempClass); $i++) {
-				echo "<option";
-				if ($tempClass[$i]['className'] == $class) echo " selected";
-
-				echo ">" . $tempClass[$i]['className'] . "</option>";
-			}
-			?>
-		</select>
-
-		請輸入關鍵字:<input type="text" name="p" onkeyup="pdlist(); " onchange="pdlist(); "><input type="submit" value="查詢" onclick="pdlist(); "> <span style="color:#999;">請輸入關鍵字,例如:蛋，乳清....</span>
-		<!--<input type="button" value="上一頁" onclick="preF();" disabled="disabled" id="prebtn">-->
-		<!--<input type="button" value="下一頁"  onclick="nextF(); " id="nextbtn">-->
-		<!--<input type="hidden" name="fname" value="<?php echo $_GET['fname']; ?>">-->
-		<!--<input type="hidden" name="f" value="<?php echo $_GET['f']; ?>">-->
-		<label><input type="checkbox" id="descShow">顯示內容物描述</label>
-		<!--</form>-->
+			<div class="row align-items-center mb-3">
+				<div class="col-md-3">
+					<label class="form-label fw-bold">食品分類：</label>
+					<select name="class" onchange="pdlist();" class="select-modern w-100">
+						<option value="all">全部</option>
+						<?php
+						$sql = "SELECT * FROM `class`";
+						$tempClass = $cart->rundata($sql);
+						for ($i = 0; $i < sizeof($tempClass); $i++) {
+							echo "<option";
+							if ($tempClass[$i]['className'] == $class) echo " selected";
+							echo ">" . $tempClass[$i]['className'] . "</option>";
+						}
+						?>
+					</select>
+				</div>
+				<div class="col-md-6">
+					<label class="form-label fw-bold">關鍵字搜尋：</label>
+					<div class="input-group">
+						<input type="text" name="p" onkeyup="pdlist();" onchange="pdlist();" class="form-control-modern" placeholder="請輸入關鍵字，例如：蛋、乳清...">
+						<button class="btn-modern" onclick="pdlist();" style="margin-left: 10px;">🔍 查詢</button>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-check" style="margin-top: 30px;">
+						<input class="form-check-input" type="checkbox" id="descShow">
+						<label class="form-check-label fw-bold" for="descShow">
+							顯示內容物描述
+						</label>
+					</div>
+				</div>
+			</div>
+			<!--<input type="button" value="上一頁" onclick="preF();" disabled="disabled" id="prebtn">-->
+			<!--<input type="button" value="下一頁"  onclick="nextF(); " id="nextbtn">-->
+			<!--<input type="hidden" name="fname" value="<?php echo $_GET['fname']; ?>">-->
+			<!--<input type="hidden" name="f" value="<?php echo $_GET['f']; ?>">-->
+			<!--</form>-->
+		</div>
 	</div>
 	<!--<div class="col-lg-12">-->
 </div>
 <!--<div class="row">-->
 <div class="row">
 	<div class="col-md-12 col-lg-8">
-		<div id="pdlist">
-
+		<div class="results-container">
+			<div id="pdlist">
+				<div class="text-center text-muted py-5">
+					<h5>請選擇營養成分或輸入關鍵字開始搜尋</h5>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!--<div class="col-lg-8">-->
 	<div class="col-md-12 col-lg-4">
-		<div id="pdDetail">
-
+		<div class="detail-container">
+			<div id="pdDetail">
+				<div class="text-center text-muted py-5">
+					<h5>📊 營養詳細資訊</h5>
+					<p>點擊食品名稱查看詳細營養成分</p>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!--<div class="col-lg-4">-->
