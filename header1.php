@@ -57,17 +57,15 @@
      background: linear-gradient(135deg, #357abd, #2968a3);
    }
    
-   /* 頭部區域樣式 */
-   .header-section {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
+   /* Logo 區域樣式 */
+   .logo-section {
+     text-align: center;
      padding: 15px 0;
-     margin-bottom: 20px;
+     margin-bottom: 15px;
    }
    
    .logo-container {
-     flex-grow: 1;
+     display: inline-block;
    }
    
    .logo-container .img-fluid {
@@ -75,8 +73,17 @@
      width: auto;
    }
    
+   /* 工具導航區域樣式 */
+   .tools-section {
+     text-align: center;
+     padding: 10px 0;
+     margin-bottom: 20px;
+     background: rgba(248, 249, 250, 0.5);
+     border-radius: 10px;
+   }
+   
    .tools-nav {
-     display: flex;
+     display: inline-flex;
      gap: 15px;
      align-items: center;
    }
@@ -117,11 +124,6 @@
    
    /* 響應式設計 */
    @media (max-width: 768px) {
-     .header-section {
-       flex-direction: column;
-       gap: 15px;
-     }
-     
      .tools-nav {
        justify-content: center;
        width: 100%;

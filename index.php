@@ -236,6 +236,13 @@ session_start();
 		font-weight: 500;
 		transition: all 0.2s ease;
 		cursor: pointer;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: inline-block;
+		min-height: 36px;
+		line-height: 20px;
+		vertical-align: top;
 	}
 
 	.btn-modern:hover {
