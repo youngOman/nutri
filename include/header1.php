@@ -39,11 +39,22 @@
      margin: 0 auto;
    }
    
+   /* 主容器寬度調整 */
+   .container-fluid {
+     max-width: 1400px !important;
+     margin: 0 auto !important;
+     padding: 0 20px !important;
+   }
+   
    /* 響應式設計 */
    @media (max-width: 991px) {
      .logo-header-container .img-fluid {
        max-height: 120px;
        width: auto;
+     }
+     
+     .container-fluid {
+       padding: 0 15px !important;
      }
    }
    
@@ -51,6 +62,13 @@
      .logo-header-container .img-fluid {
        max-height: 150px;
        width: auto;
+     }
+   }
+   
+   @media (min-width: 1200px) {
+     .container-fluid {
+       max-width: 1400px !important;
+       padding: 0 30px !important;
      }
    }
  </style>
