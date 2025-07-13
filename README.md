@@ -4,6 +4,10 @@
 
 一個基於 PHP + Bootstrap4 的食品營養成分查詢系統，提供台灣地區食品營養資訊的便捷查詢功能。
 
+![image1](https://github.com/youngOman/nutri/blob/main/calculator.png)
+
+![image1](https://github.com/youngOman/nutri/blob/main/homepage.png)
+
 ## 功能特色
 
 - **營養成分查詢** - 支援關鍵字搜尋食品營養資訊
