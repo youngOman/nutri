@@ -160,9 +160,9 @@ session_start();
 		background-color: #fff;
 		border-radius: 8px;
 		overflow: hidden;
-		box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 	}
-	
+
 	.table th {
 		text-align: left;
 		background: linear-gradient(135deg, #4a90e2, #357abd);
@@ -204,7 +204,7 @@ session_start();
 		background: #fff;
 		border-radius: 12px;
 		padding: 20px;
-		box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 		margin-bottom: 20px;
 		border: 1px solid #e3f2fd;
 	}
@@ -216,7 +216,7 @@ session_start();
 		margin-bottom: 20px;
 		border: 1px solid #e3e7ed;
 		color: #495057;
-		box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 	}
 
 	.quick-buttons-card p {
@@ -295,7 +295,7 @@ session_start();
 		background: #fff;
 		border-radius: 12px;
 		padding: 20px;
-		box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 		min-height: 200px;
 	}
 
@@ -303,7 +303,7 @@ session_start();
 		background: #fff;
 		border-radius: 12px;
 		padding: 20px;
-		box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 		min-height: 200px;
 		position: sticky;
 		top: 20px;
@@ -311,17 +311,20 @@ session_start();
 
 	/* 響應式設計 */
 	@media (max-width: 768px) {
-		.search-card, .quick-buttons-card {
+
+		.search-card,
+		.quick-buttons-card {
 			margin: 10px 0;
 			padding: 15px;
 		}
-		
+
 		.btn-modern {
 			width: 48%;
 			margin-bottom: 8px;
 		}
-		
-		.table th, .table td {
+
+		.table th,
+		.table td {
 			padding: 8px;
 			font-size: 14px;
 		}
@@ -350,6 +353,11 @@ session_start();
 <div class="row">
 	<div class="col-lg-12">
 
+		<div class="btn-group">
+			<button type="button" class="btn btn-info" onclick="window.location.href='mapajax.php'">健身地圖</button>
+			<button type="button" class="btn btn-info" onclick="window.location.href='calculater.php'">計算器</button>
+		</div>
+
 		<div class="quick-buttons-card">
 			<p>[常用營養成分排行]
 				<?php
@@ -364,17 +372,17 @@ session_start();
 				?>
 			</p>
 			<div>
-			<?php
-			//$sql="SHOW FULL COLUMNS FROM `nutri`";
-			$sql = "SELECT * FROM `fileds` WHERE `orderby`>2 ORDER BY `orderby` DESC";
-			$temp = $cart->rundata($sql);
-			//print_r($temp);
-			for ($i = 0; $i < sizeof($temp); $i++) {
-				$qstr = "&" . $_SERVER['QUERY_STRING']; //取得網址?後面的值
-				echo "<button class='btn-modern' value='" . $temp[$i]['filedName'] . "'";
-				echo "onclick=\"pdlist('" . $temp[$i]['filed'] . "','" . $temp[$i]['filedName'] . "')\" style='width:110px; margin: 3px;'>" . $temp[$i]['filedName'] . "</button> ";
-			}
-			?>
+				<?php
+				//$sql="SHOW FULL COLUMNS FROM `nutri`";
+				$sql = "SELECT * FROM `fileds` WHERE `orderby`>2 ORDER BY `orderby` DESC";
+				$temp = $cart->rundata($sql);
+				//print_r($temp);
+				for ($i = 0; $i < sizeof($temp); $i++) {
+					$qstr = "&" . $_SERVER['QUERY_STRING']; //取得網址?後面的值
+					echo "<button class='btn-modern' value='" . $temp[$i]['filedName'] . "'";
+					echo "onclick=\"pdlist('" . $temp[$i]['filed'] . "','" . $temp[$i]['filedName'] . "')\" style='width:110px; margin: 3px;'>" . $temp[$i]['filedName'] . "</button> ";
+				}
+				?>
 			</div>
 		</div>
 		<?php
